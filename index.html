@@ -2,31 +2,35 @@
    <head>
       <title>Visualizer</title>
       <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.2.1/angular-material.min.css">
+      <link rel="stylesheet" href="style/style.css">
    </head>
    
-   <body layout="column">
+   <body layout="column" ng-controller="ListCtrl" ng-cloak>
        <md-toolbar>
            <h1 id="headingTop">Algorithm Visualizer</h1>
        </md-toolbar>
        <div class="container" layout="row" flex>
             <md-sidenav md-is-locked-open="true" class="lightblue">
-                <md-list ng-controller="ListCtrl" ng-cloak>
+                <md-list>
                     <md-subheader class="md-no-sticky side-nav-heading"><h2>Algorithms</h2></md-subheader>
                     <md-list ng-repeat="algo in algos">
                         <md-list-item ng-click="toggle[algo.name] = !toggle[algo.name]" class="noright">
                             <p>{{ algo.name }}</p>
                         </md-list-item>
                         <div ng-class="{ showMe: toggle[algo.name] }" class="collapsable">
-                            <md-list-item ng-click="1" ng-repeat="item in data[algo.name]">
+                            <md-list-item ng-repeat="item in data[algo.name]" ng-click='algoSelected[0] = item'>
                                 <span flex-offset="10">{{item}}</span>
                             </md-list-item>
                         </div>
                     </md-list>
               </md-list>
            </md-sidenav>
-           <md-content id="content" class="lightgreen" flex>
-               Content
+           <md-content ng-if="algoSelected[0] == 'Linear Search'" id="content" class="lightgreen" flex>
+            <div ng-include="'linearsearch.html'"></div>
            </md-content>
+           <md-content ng-if="algoSelected[0] == 'Binary Search'" id="content" class="lightgreen" flex>
+            Binary Search
+        </md-content>
        </div>
       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.min.js"></script>
@@ -35,52 +39,6 @@
       
       <!-- Angular Material Javascript now available via Google CDN; version 1.2.1 used here -->
       <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.2.1/angular-material.min.js"></script>
-      <script>
-        // Include app dependency on ngMaterial
-        angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngAnimate'])
-          .run(function(){
-              console.log("my app is ready!");
-          })
-          .controller('ListCtrl', function($scope, $mdDialog) {
-            $scope.algos = [
-                { name: 'Search'},
-                { name: 'Sort'},
-                { name: 'Path Finding'},
-                { name: 'Extra'}
-                ];
-            $scope.data = {"Sort": ["Quick Sort", "Bubble Sort", "Insert Sort", "Merge Sort", "Selection Sort", "Heap Sort"], "Search": ["Linear Search", "Binary Search", "Jump Search", "Interpolation Search", "Fibonacci Search"], "Path Finding": ["Dijkstra Algorithm", "A* Algorithm"]};
-            $scope.toggle = {};
-          })
-      </script>
-      <style>
-          .red {
-              background-color: red;
-          }
-          .lightblue {
-              background-color: lightblue;
-          }
-          .lightgreen {
-              background-color: lightgreen;
-          }
-          #headingTop {
-              text-align: center;
-          }
-          .side-nav-heading {
-              background-color: lightblue;
-          }
-
-          .collapsable {
-            -webkit-transition: max-height 1s;
-            -moz-transition: max-height 1s;
-            -ms-transition: max-height 1s;
-            -o-transition: max-height 1s;
-            transition: max-height 1s;
-            overflow: hidden;
-            max-height: 0px;        
-        }
-        .collapsable.showMe {
-            max-height: 300px;
-        }
-      </style>
+      <script src="js/index.js"></script>
    </body>
 </html>

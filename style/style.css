@@ -1,0 +1,43 @@
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #ebebeb;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #6d6d6d; 
+}
+  .red {
+      background-color: red;
+  }
+  .lightblue {
+      background-color: lightblue;
+  }
+  .lightgreen {
+      background-color: lightgreen;
+  }
+  #headingTop {
+      text-align: center;
+  }
+  .side-nav-heading {
+      background-color: lightblue;
+  }
+
+  .collapsable {
+    -webkit-transition: max-height 1s;
+    -moz-transition: max-height 1s;
+    -ms-transition: max-height 1s;
+    -o-transition: max-height 1s;
+    transition: max-height 1s;
+    overflow: hidden;
+    max-height: 0px;        
+}
+.collapsable.showMe {
+    max-height: 300px;
+}
